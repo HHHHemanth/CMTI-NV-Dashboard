@@ -40,7 +40,8 @@ function TiltArea({
   );
 }
 
-function TiltCard({ card }: { card: CardData }) {
+function TiltCard({ card, id }: { card: CardData; id?: string }) {
+
   const rootRef = useRef<HTMLElement | null>(null);
 
   const rotateAmplitude = 10;
@@ -69,8 +70,9 @@ function TiltCard({ card }: { card: CardData }) {
   };
 
   return (
-    
+
     <article
+      id={id}
       ref={rootRef}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
@@ -87,13 +89,17 @@ function TiltCard({ card }: { card: CardData }) {
         </p>
 
         {/* BUTTON AREA */}
-<ShimmerButton
-className="text-black text-base"
-  shimmerColor="rgba(0, 0, 0, 1)"
-  background="#ffffff"
->
-  Explore More
-</ShimmerButton>
+        <Link href={card.link ?? "#"}>
+
+          <ShimmerButton
+            className="text-black text-base"
+            shimmerColor="rgba(0, 0, 0, 1)"
+            background="#ffffff"
+          >
+            Explore More
+          </ShimmerButton>
+
+        </Link>
       </div>
     </article>
   );
@@ -134,7 +140,12 @@ export default function ThreeDCard() {
 
 
       {cards.map((c) => (
-        <TiltCard key={c.id} card={c} />
+        <TiltCard
+          key={c.id}
+          id={`feature-${c.title.replace(/\s+/g, '-').toLowerCase()}`}
+          card={c}
+        />
+
       ))}
     </div>
   );

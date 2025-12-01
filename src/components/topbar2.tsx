@@ -4,7 +4,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { Menu, Moon, Sun } from "lucide-react"
 import { SlEnergy } from "react-icons/sl"
-import CardNav from "./CardNav"
+import CardNav from "./CardNav2"
 
 interface TopbarProps {
   onMenuClick: (open: boolean) => void;
@@ -44,36 +44,13 @@ export function Topbar({
   // CardNav items (from your example)
   const items = [
     {
-      label: "Features",
-      bgColor: "#0D0716",
-      textColor: "#fff",
-      // in topbar.tsx items
-      links: [
-        { label: "Energy Monitoring", ariaLabel: "Energy Monitoring", href: "/#feature-energy-monitoring" },
-        { label: "Temperature Monitoring", ariaLabel: "Temperature Monitoring", href: "/#feature-temperature-monitoring" },
-        { label: "Vibration Monitoring", ariaLabel: "Vibration Monitoring", href: "/#feature-vibration-monitoring" },
-      ],
-
+      
     },
     {
-      label: "Case Studies",
-      bgColor: "#170D27",
-      textColor: "#fff",
-      links: [
-        { label: "Case 1", ariaLabel: "Case 1", href: "/#case-studies" },
-        { label: "Case 2", ariaLabel: "Case 2", href: "/#case-studies" },
-        { label: "Case 3", ariaLabel: "Case 3", href: "/#case-studies" },
-      ],
+      
     },
     {
-      label: "Contact",
-      bgColor: "#271E37",
-      textColor: "#fff",
-      links: [
-        { label: "Phone No.", ariaLabel: "Call us", href: "/#contact-us" },
-        { label: "Email", ariaLabel: "Email us", href: "/#contact-us" },
-        { label: "LinkedIn", ariaLabel: "LinkedIn", href: "/#contact-us" },
-      ],
+      
     },
   ];
 
