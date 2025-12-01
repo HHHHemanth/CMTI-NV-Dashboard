@@ -1,5 +1,5 @@
 // src/app/layout.tsx
-import "./globals.css"; // only place global CSS should be imported
+import "./globals.css";
 import React from "react";
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={robotoFlex.className}>
       <body>
         {children}
       </body>
