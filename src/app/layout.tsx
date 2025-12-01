@@ -22,15 +22,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-<<<<<<< HEAD
-    <html lang="en">
-      <body>{children}</body>
-=======
+
     <html lang="en" className={robotoFlex.className}>
       <body>
         {children}
       </body>
->>>>>>> fe9fb27 (Updated project with new system changes)
+
+    <html lang="en" className={robotoFlex.className}>
+      <body>
+        {children}
+      </body>
+
     </html>
   );
 }
