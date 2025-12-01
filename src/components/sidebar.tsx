@@ -4,21 +4,22 @@ import type React from "react"
 import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, LayoutDashboard, Cable, Thermometer, AudioLines } from "lucide-react"
 import { useCallback, useEffect, useState, useRef } from "react"
-
+import { useRouter } from "next/navigation";
 interface SidebarProps {
   isOpen: boolean
   onToggle: (open: boolean) => void
 }
 
-const MENU_ITEMS = [
-  { id: "dashboard", label: "Home", icon: LayoutDashboard },
-  { id: "insights", label: "Energy", icon: Cable },
-  { id: "reports", label: "Temperature", icon: Thermometer },
-  { id: "settings", label: "Vibration", icon: AudioLines },
-]
 
+const MENU_ITEMS = [
+  { id: "Home", label: "Home", icon: LayoutDashboard, path: "/" },
+  { id: "Energy", label: "Energy", icon: Cable, path: "/energy" },
+  { id: "Temperature", label: "Temperature", icon: Thermometer, path: "/temperature" },
+  { id: "Vibration", label: "Vibration", icon: AudioLines, path: "/vibration" },
+];
 // Expanded Sidebar
 export function Sidebar({ isOpen, onToggle }: SidebarProps) {
+  const router = useRouter();
   const [isMounted, setIsMounted] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const collapseTimer = useRef<number | null>(null)
@@ -116,8 +117,11 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
         >
           {MENU_ITEMS.map((item, index) => {
             const Icon = item.icon
+            // const router = useRouter()
             return (
+
               <motion.button
+                onClick={() => router.push(item.path)}
                 key={item.id}
                 data-testid={`nav-${item.id}`}
                 aria-label={item.label}
@@ -206,15 +210,15 @@ export function SidebarCollapsed({ onToggle }: { onToggle: (open: boolean) => vo
     },
   }
 
-const iconVariants = {
-  hidden: { opacity: 0, scale: 0, rotateZ: -180 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    rotateZ: 0,
-    transition: { type: "spring", stiffness: 150, damping: 15 } as any,
-  },
-};
+  const iconVariants = {
+    hidden: { opacity: 0, scale: 0, rotateZ: -180 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      rotateZ: 0,
+      transition: { type: "spring", stiffness: 150, damping: 15 } as any,
+    },
+  };
 
 
 
@@ -264,7 +268,7 @@ const iconVariants = {
                 whileHover={{
                   scale: 1.10,
                   rotateZ: 3,
-                  transition: { type: "spring", stiffness: 110, damping: 16  },
+                  transition: { type: "spring", stiffness: 110, damping: 16 },
                 }}
                 whileTap={{ scale: 0.9 }}
               >

@@ -1,6 +1,8 @@
+
 // ./app/dashboard/page.tsx
 "use client"
-
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion"
 import { DashboardLayout } from "../components/dashboard-layout"
 import HeroSection from "../components/HeroSection";
@@ -26,6 +28,21 @@ const containerVariants = {
   },
 };
 
+
+function ScrollOnHash() {
+  const pathname = usePathname();
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash;
+    if (!hash) return;
+    setTimeout(() => {
+      const id = hash.replace("#", "");
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 50);
+  }, [pathname]);
+  return null;
+}
+
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -40,16 +57,20 @@ const itemVariants = {
 
   return (
     <DashboardLayout>
+      <ScrollOnHash />        {/* render it here */}
       <motion.div
         className="mt-20 max-w-6xl mx-auto space-y-12"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
+      <section id="hero-section">
         {/* Hero Section */}
         <HeroSection itemVariants={itemVariants} />
+          </section>
 
         {/* Insert formatted ThreeDCard component here */}
+      <section id="features-section">
 
         <motion.div variants={itemVariants} className="space-y-4">
 
@@ -64,11 +85,15 @@ const itemVariants = {
 
           <ThreeDCard />
         </motion.div>
+          </section>
 
         {/* --- add CaseStudy right after --- */}
+      <section id="case-studies">
+
         <motion.div variants={itemVariants}>
           <CaseStudy />
         </motion.div>
+          </section>
 
 
         {/* ---- Technology Logo Loop ---- */}
@@ -77,24 +102,27 @@ const itemVariants = {
         </motion.div>
 
         {/* ---- Contact Us Section ---- */}
-        <motion.div variants={itemVariants}>
-          <BlurText
-            text="Contact Us"
-            delay={300}
-            animateBy="words"
-            direction="top"
-            onAnimationComplete={handleAnimationComplete}
-            className="text-5xl font-bold mt-20 text-center flex justify-center"
-          />
-          <ContactUs />
-        </motion.div>
+        <section id="contact-us">
+          <motion.div variants={itemVariants}>
+            <BlurText
+              text="Contact Us"
+              delay={300}
+              animateBy="words"
+              direction="top"
+              onAnimationComplete={handleAnimationComplete}
+              className="text-5xl font-bold mt-20 text-center flex justify-center"
+            />
+            <ContactUs />
+          </motion.div>
+        </section>
 
         {/* ---- Footer Section ---- */}
 
         <FooterSection/>
-
-
       </motion.div>
+
+
     </DashboardLayout>
   )
 }
+
